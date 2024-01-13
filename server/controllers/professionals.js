@@ -2,7 +2,7 @@
 
 const getAllData = (req, res) => {
     res.status(200).send({
-        "professionalName": "Miguel Prot",
+        "professionalName": "Miguel Prot 2",
         "nameLink": {
             "firstName": "Miguel ",
             "url": "https://hamacaweb.solutions/"
