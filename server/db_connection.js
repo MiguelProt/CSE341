@@ -8,6 +8,7 @@ const client = new MongoClient(url);
 
 const getCollection = async (collectionName, findByRow = null) => {
     try {
+        console.log(process.env.MONGO_DB_NAME, '------- ENV --------');
         // Use connect method to connect to the server
         await client.connect();
         const db = client.db(process.env.MONGO_DB_NAME);
