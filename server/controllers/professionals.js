@@ -3,9 +3,7 @@ const mongodb = require('../db_connection');
 
 const getAllData = async (req, res, next) => {
     try {
-        const result = await mongodb.getCollection('user', {
-            professionalName: "Miguel Prot"
-        });
+        const result = await mongodb.getCollection('user', '65a21c77623817016dc90dac');
         res.status(200).send(result);
     } catch (error) {
         console.error('Error fetching data:', error);
