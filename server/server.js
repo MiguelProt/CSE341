@@ -13,7 +13,8 @@ app
         res.setHeader('Access-Control-Allow-Origin', '*');
         next();
     })
-    .use('/professional', require('./routes/professionals'));
+    .use('/professional', require('./routes/professionals'))
+    .use('/contacts', require('./routes/contacts'));
 
     app.get('/', (req, res) => {
         res.status(200).send({
