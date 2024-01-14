@@ -6,15 +6,14 @@ const { MongoClient, ObjectId } = require('mongodb');
 const url = process.env.MONGO_DB_URI;
 const client = new MongoClient(url);
 
-const getCollection = async (collectionName, findByRow = null) => {
+const getCollection = async (collectionName, id = null) => {
     try {
-        console.log(process.env.MONGO_DB_NAME, '------- ENV --------');
         // Use connect method to connect to the server
         await client.connect();
         const db = client.db(process.env.MONGO_DB_NAME);
         const collection = db.collection(collectionName);
-        if (findByRow) {
-            return collection.findOne(findByRow);
+        if (id) {
+            return collection.findOne({_id: new ObjectId(id)});
         }
         return collection.find().toArray();
     } catch (error) {
