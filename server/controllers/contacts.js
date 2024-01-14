@@ -2,7 +2,13 @@ const mongodb = require('../db_connection');
 
 const getAllData = async (req, res) => {
     try {
-        const result = await mongodb.getCollection('contact');
+        const id = req.params.id;
+        let result = null;
+        if(id) {
+            result = await mongodb.getCollection('contact', id);
+        } else {
+            result = await mongodb.getCollection('contact');
+        }
         res.status(200).send(result);
     } catch (error) {
         console.error('Error fetching data:', error);
