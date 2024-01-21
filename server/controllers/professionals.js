@@ -1,4 +1,4 @@
-const mongodb = require('../db_connection');
+const mongodb = require('../db/connections');
 
 
 const getAllData = async (req, res, next) => {
