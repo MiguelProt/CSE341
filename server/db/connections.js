@@ -4,7 +4,30 @@ dotenv.config();
 const { MongoClient, ObjectId } = require('mongodb');
 
 const url = process.env.MONGO_DB_URI;
-const client = new MongoClient(url);
+// const client = new MongoClient(url);
+let database;
+
+const initDb = (callback) => {
+    if (database) {
+        console.log(`Database is already initiated!`)
+        return callback(null, database)
+    }
+    MongoClient.connect(url)
+        .then((client) => {
+            database = client
+            callback(null, database)
+        })
+        .catch((err) => {
+            callback(err)
+        })
+}
+
+const getDatabase = () => {
+    if (!database) {
+        throw Error('Database not initialized')
+    }
+    return database
+}
 
 const getCollection = async (collectionName, id = null) => {
     try {
@@ -64,6 +87,8 @@ const deleteDocument = async (collectionName, id) => {
 }
 
 module.exports = {
+    initDb,
+    getDatabase,
     getCollection,
     insertDocument,
     updateDocument,
