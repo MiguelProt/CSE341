@@ -7,20 +7,15 @@ const mongodb = require('./db/connections');
 dotenv.config();
 
 // Convert a request (POST,GET) to JSON Object
-app.use(bodyParser.urlencoded({extended:false}))
-    .use(bodyParser.json())
-    .use((req, res, next) => {
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        next();
-    })
-    .use('/professional', require('./routes/professionals'))
-    .use('/users', require('./routes/contacts'));
-
-    app.get('/', (req, res) => {
-        res.status(200).send({
-            message: 'Hello World!'
-        });
-    });
+app.use(bodyParser.json());
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Headers',
+        'Origin, X-Requested-With, Content-Type, Accept, z-key')
+    res.setHeader('Access-Controll-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+    next();
+});
+app.use('/', require('./routes'));
 
 mongodb.initDb((err) => {
     if (err) {

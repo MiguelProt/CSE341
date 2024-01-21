@@ -4,7 +4,7 @@
 GET {{baseUrl}}/users HTTP/1.1
 
 ### Gets a contact by id
-GET {{baseUrl}}/users/65a2ff17cf7be73b1b41dbb6 HTTP/1.1
+GET {{baseUrl}}/users/65ac5da5048d1d549497ceeb HTTP/1.1
 
 ### Create a contact
 POST {{baseUrl}}/users/
@@ -23,7 +23,7 @@ PUT {{baseUrl}}/users/65ac5da5048d1d549497ceeb
 Content-Type: application/json
 
 {
-    "firstName": "Raul",
+    "firstName": "Raulon",
     "lastName": "Hernandez",
     "email": "raul2@hndz.com",
     "favoriteColor": "Red",
@@ -31,13 +31,4 @@ Content-Type: application/json
 }
 
 ### Deleting an specific contact
-DELETE {{baseUrl}}/users/65a2ff17cf7be73b1b41dbb5
-Content-Type: application/json
-
-{
-    "firstName": "Raul",
-    "lastName": "Hernandez",
-    "email": "raul2@hndz.com",
-    "favoriteColor": "Red",
-    "birthday": "2014-09-09"
-}
+DELETE {{baseUrl}}/users/65a2ff17cf7be73b1b41dbb8

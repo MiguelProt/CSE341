@@ -65,10 +65,11 @@ const collection = 'contact';
 // }
 
 const getAllData = async (req, res) => {
+    // #swagger.tags = ['Users']
     try {
         const id = req.params.id || null;
         let result = null;
-        console.log(id);
+        
         if (id) {
             result = await mongodb.getDatabase().db().collection(collection).find({_id: new ObjectId(id)});
             result.toArray().then((Contacts) => {
@@ -84,13 +85,13 @@ const getAllData = async (req, res) => {
         }
         
     } catch (error) {
-        console.error('Error Inserting data:', error);
+        console.error('Error getting data:', error);
         res.status(500).send('Internal Server Error');
     }
 }
 
 const createUser = async (req, res) => {
-    
+    // #swagger.tags = ['Users']
     try {
         const user = {
             firstName: req.body.firstName,
@@ -113,16 +114,17 @@ const createUser = async (req, res) => {
 }
 
 const updateUser = async (req, res) => {
+    // #swagger.tags = ['Users']
     try {
         const id = req.params.id;
-        // const user = {
-        //     firstName: req.body.firstName,
-        //     lastName: req.body.lastName,
-        //     email: req.body.email,
-        //     favoriteColor: req.body.favoriteColor,
-        //     birthday: req.body.birthday
-        // }
-        const user = Object.assign({}, req.body);
+        const user = {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            favoriteColor: req.body.favoriteColor,
+            birthday: req.body.birthday
+        }
+        // const user = Object.assign({}, req.body);
 
         const response = await mongodb.getDatabase().db().collection(collection).updateOne({_id: new ObjectId(id)}, {$set: user});
         if (response.acknowledged) {
@@ -137,6 +139,7 @@ const updateUser = async (req, res) => {
 }
 
 const deleteUser = async (req, res) => {
+    // #swagger.tags = ['Users']
     const id = new ObjectId(req.params.id)
     const response = await mongodb.getDatabase().db().collection(collection).deleteOne({ _id: id }, true);
     
